@@ -1,0 +1,45 @@
+{
+    "manifest_version": 3,
+    "name": "youtube-filter",
+    "version": "1.0",
+    "description": "Hide youtube videos based on my preference",
+    "icons": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+    },
+    "web_accessible_resources": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "resources": [
+                "src/waitForElm.js"
+            ]
+        }
+    ],
+    "content_scripts": [
+        {
+            "js": [
+                "src/filterHome.js"
+            ],
+            "matches": [
+                "https://www.youtube.com/"
+            ],
+            "run_at": "document_idle"
+        },
+        {
+            "js": [
+                "src/filterWatching.js"
+            ],
+            "matches": [
+                "https://www.youtube.com/watch?*"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_popup": "src/test.html"
+    }
+}

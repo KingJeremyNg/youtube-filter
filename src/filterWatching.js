@@ -21,6 +21,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             let time = element.querySelector("#time-status > span")?.innerHTML.trim().split(":").map((str) => Number(str));
             if (time && time[0] == 0) {
                 element.parentNode.remove();
+                return;
             }
 
             // Remove low view count videos
@@ -29,6 +30,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
                 let [value, measure] = splitAtIndex(views[0], views[0].length - 1);
                 if (!["K", "M", "B"].includes(measure)) {
                     element.parentNode.remove();
+                    return;
                 }
             }
 
@@ -36,6 +38,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             let watchedProgress = element.querySelector("#overlays > ytd-thumbnail-overlay-resume-playback-renderer > #progress")?.getAttribute("style");
             if (watchedProgress) {
                 element.parentNode.remove();
+                return;
             }
         })
     }, 500);

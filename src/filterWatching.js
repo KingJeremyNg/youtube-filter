@@ -20,7 +20,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             // Remove short form videos
             let time = element.querySelector("#time-status > span")?.innerHTML.trim().split(":").map((str) => Number(str));
             if (time && time[0] == 0) {
-                element.parentNode.remove();
+                element.remove();
                 return;
             }
 
@@ -29,7 +29,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             if (views) {
                 let [value, measure] = splitAtIndex(views[0], views[0].length - 1);
                 if (!["K", "M", "B"].includes(measure)) {
-                    element.parentNode.remove();
+                    element.remove();
                     return;
                 }
             }
@@ -37,7 +37,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             // Remove already watched videos
             let watchedProgress = element.querySelector("#overlays > ytd-thumbnail-overlay-resume-playback-renderer > #progress")?.getAttribute("style");
             if (watchedProgress) {
-                element.parentNode.remove();
+                element.remove();
                 return;
             }
         })

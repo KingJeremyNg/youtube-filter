@@ -1,18 +1,3 @@
-function splitAtIndex(value, index) {
-    return [Number(value.substring(0, index)), value.substring(index)];
-}
-
-const waitForElements = (elements) => {
-    return new Promise((resolve, reject) => {
-        const intervalID = setInterval(() => {
-            if (document.querySelector(elements)) {
-                clearInterval(intervalID);
-                resolve();
-            }
-        }, 500);
-    })
-};
-
 waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(() => {
     setInterval(() => {
         let elements = document.querySelectorAll("[id=dismissible]");
@@ -20,7 +5,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             // Remove short form videos
             let time = element.querySelector("#time-status > span")?.innerHTML.trim().split(":").map((str) => Number(str));
             if (time && time[0] == 0) {
-                element.remove();
+                element.parentNode.remove();
                 return;
             }
 
@@ -29,7 +14,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             if (views) {
                 let [value, measure] = splitAtIndex(views[0], views[0].length - 1);
                 if (!["K", "M", "B"].includes(measure)) {
-                    element.remove();
+                    element.parentNode.remove();
                     return;
                 }
             }
@@ -37,7 +22,7 @@ waitForElements("#contents > ytd-compact-video-renderer > #dismissible").then(()
             // Remove already watched videos
             let watchedProgress = element.querySelector("#overlays > ytd-thumbnail-overlay-resume-playback-renderer > #progress")?.getAttribute("style");
             if (watchedProgress) {
-                element.remove();
+                element.parentNode.remove();
                 return;
             }
         })

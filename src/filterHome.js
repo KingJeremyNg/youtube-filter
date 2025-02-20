@@ -1,18 +1,3 @@
-function splitAtIndex(value, index) {
-    return [Number(value.substring(0, index)), value.substring(index)];
-}
-
-const waitForElements = (elements) => {
-    return new Promise((resolve, reject) => {
-        const intervalID = setInterval(() => {
-            if (document.querySelector(elements)) {
-                clearInterval(intervalID);
-                resolve();
-            }
-        }, 500);
-    })
-};
-
 waitForElements("#contents > .ytd-rich-grid-renderer > #content").then(() => {
     setInterval(() => {
         let elements = document.querySelectorAll("[id=dismissible]");

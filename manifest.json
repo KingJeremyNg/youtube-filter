@@ -22,19 +22,23 @@
     "content_scripts": [
         {
             "js": [
-                "src/filterHome.js"
+                "src/filterHome.js",
+                "src/waitForElements.js",
+                "src/splitAtIndex.js"
             ],
             "matches": [
-                "https://www.youtube.com/"
+                "*://www.youtube.com/*"
             ],
             "run_at": "document_idle"
         },
         {
             "js": [
-                "src/filterWatching.js"
+                "src/filterWatching.js",
+                "src/waitForElements.js",
+                "src/splitAtIndex.js"
             ],
             "matches": [
-                "https://www.youtube.com/watch?*"
+                "https://www.youtube.com/watch*"
             ],
             "run_at": "document_idle"
         }
